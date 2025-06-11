@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key});
+  const WelcomeScreen({Key? key}) : super(key: key);
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
-
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final PageController _pageController = PageController();
   int currentPage = 0;
@@ -20,11 +19,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _pageController.dispose();
     super.dispose();
   }
-
-  void navigateTo(String routeName) {
-    Navigator.pushNamed(context, routeName);
-  }
-
+  // void navigateTo(String routeName) {
+  //   Navigator.pushNamed(context, routeName);
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +79,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: EdgeInsets.all(16.0),
                 child: Text(
                   'Building meaningful mentorships to help you grow professionally.',
-                  style: TextStyle(fontSize: 16, color: Color(0xFF3F2C2C)),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0xFF3F2C2C),
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -92,7 +92,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => navigateTo('/signup'),
+                      onPressed: () => context.push('/signup'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF3F2C2C),
                         shape: RoundedRectangleBorder(
@@ -100,16 +100,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      child: const Text('Sign Up', style: TextStyle(color: Colors.white)),
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => navigateTo('/login'),
+                      onPressed: () => context.push('/login'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFFF0F0),
                         shape: RoundedRectangleBorder(
@@ -117,14 +114,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: Color(0xFF3F2C2C)),
-                      ),
+                      child: const Text('Login', style: TextStyle(color: Color(0xFF3F2C2C))),
                     ),
                   ),
                 ],
-              ),
+              )
             ],
           ),
         ),
