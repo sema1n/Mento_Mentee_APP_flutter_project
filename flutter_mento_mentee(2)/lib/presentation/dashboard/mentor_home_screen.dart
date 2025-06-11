@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mento_mentee/application/mentorship-request/mentorship_request_notifier.dart';
 import 'package:flutter_mento_mentee/presentation/common_widgets/bottom_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class MentorHomeScreen extends StatefulWidget {
   const MentorHomeScreen({super.key});
@@ -9,26 +11,28 @@ class MentorHomeScreen extends StatefulWidget {
 }
 
 class _MentorHomeScreenState extends State<MentorHomeScreen> {
-  final int _currentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF1F1F1),
       appBar: AppBar(
-        title: const Text('Home', style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Home',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: const Color(0xFF3F2C2C),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white),
-            onPressed: () {
-              Navigator.pushNamed(context, '/settings');
-            },
-            tooltip: 'Settings',
-          ),
-        ],
+  icon: const Icon(Icons.settings, color: Colors.white),
+  onPressed: () => context.push('/settings'),
+  tooltip: 'Settings',
+),]
+
       ),
       bottomNavigationBar: MentorBottomBar(
+        provider: mentorshipRequestNotifierProvider,
         currentIndex: _currentIndex,
         context: context, // Pass the context here
       ),
@@ -41,10 +45,16 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
               children: [
                 const Text(
                   'Welcome, Mentor!',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 16),
-                const Text('Mentor Home', style: TextStyle(fontSize: 16)),
+                const Text(
+                  'Mentor Home',
+                  style: TextStyle(fontSize: 16),
+                ),
                 const SizedBox(height: 16),
                 _buildStatusCard(),
                 const SizedBox(height: 16),
@@ -70,7 +80,10 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
           children: [
             const Text(
               'Request Status',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             _buildStatusRow('Pending Requests', '0'),
@@ -94,10 +107,16 @@ class _MentorHomeScreenState extends State<MentorHomeScreen> {
           children: const [
             Text(
               'Credentials',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 8),
-            Text('No credentials added', style: TextStyle(fontSize: 16)),
+            Text(
+              'No credentials added',
+              style: TextStyle(fontSize: 16),
+            ),
           ],
         ),
       ),
