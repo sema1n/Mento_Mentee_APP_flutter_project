@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mento_mentee/application/mentorship-request/mentorship_request_notifier.dart';
 import 'package:flutter_mento_mentee/presentation/common_widgets/bottom_bar.dart';
 
 class MenteeHomeScreen extends StatefulWidget {
@@ -9,14 +10,17 @@ class MenteeHomeScreen extends StatefulWidget {
 }
 
 class _MenteeHomeScreenState extends State<MenteeHomeScreen> {
-  final int _currentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF1F1F1),
       appBar: AppBar(
-        title: const Text('Home', style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Home',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: const Color(0xFF3F2C2C),
         actions: [
           IconButton(
@@ -30,7 +34,7 @@ class _MenteeHomeScreenState extends State<MenteeHomeScreen> {
       ),
       bottomNavigationBar: MenteeBottomBar(
         currentIndex: _currentIndex,
-        context: context, // Pass the context here
+        context: context, provider: mentorshipRequestNotifierProvider, // Pass the context here
       ),
       body: SafeArea(
         child: Padding(
@@ -41,10 +45,16 @@ class _MenteeHomeScreenState extends State<MenteeHomeScreen> {
               children: const [
                 Text(
                   'Welcome, User!',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 SizedBox(height: 16),
-                Text('Mentee Home', style: TextStyle(fontSize: 16)),
+                Text(
+                  'Mentee Home',
+                  style: TextStyle(fontSize: 16),
+                ),
                 SizedBox(height: 16),
                 RequestStatusCard(),
                 SizedBox(height: 16),
@@ -86,7 +96,10 @@ class RequestStatusCard extends StatelessWidget {
           children: [
             const Text(
               'Request Status',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 4),
             _buildStatusRow('Pending Requests', '0'),
@@ -115,10 +128,16 @@ class AchievementsCard extends StatelessWidget {
           children: const [
             Text(
               'Achievements',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 8),
-            Text('No achievements', style: TextStyle(fontSize: 16)),
+            Text(
+              'No achievements',
+              style: TextStyle(fontSize: 16),
+            ),
           ],
         ),
       ),
