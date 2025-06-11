@@ -1,0 +1,122 @@
+# Create a new user
+POST http://localhost:8888/auth/signup
+Content-Type: application/json
+
+{
+  "name" :"joe",
+  "email": "johndoe@example.com",
+  "password" : "111111111",
+  "role" : "mentor",
+  "skill":"Frontend"
+}
+
+# Login a user
+POST http://localhost:8888/auth/login
+Content-Type: application/json
+
+{
+  "email": "janedoe@example.com",
+  "password" : "111111111",
+  "role" : "'mentee"
+}
+#task end point
+
+#Get Assigned Tasks
+
+POST http://localhost:8888/tasks/
+Bearer Token
+
+{
+  "taskTitle": "Complete Resume Review",
+  "description": "Review the mentee's resume and provide feedback.",
+  "dueDate": "2025-05-10T23:59:00.000Z",
+  "priority": "High",
+  "menteeId": "6813efb938e34a141a23006c",
+}
+
+
+#Get Task by ID (Mentor or Mentee)
+Bearer Token
+GET http://localhost:8888/tasks/taskid
+
+
+#Mark Task Completed (Mentee Only)
+Bearer Token
+PATCH  http://localhost:8888/tasks/taskid/status
+
+
+#Update Task (Mentor Only)
+Bearer Token
+PATCH  http://localhost:8888/tasks/taskid
+
+{
+  "priority": "Medium",
+  "description": "Update task after revision"
+}
+
+
+#Delete Task (Mentor Only)
+Bearer Token
+DELETE http://localhost:8888/tasks/taskid
+
+#fetch tasks(mentee only)
+GET  http://localhost:8888/tasks/mentee/assigned
+Bearer Token(mentee)
+
+
+#Mentorship request end point
+
+#create mentorship request
+POST http://localhost:8888/mentorship-requests
+Bearer Token(mentee)
+{
+  "startDate": "2025-05-08T00:00:00Z",
+  "endDate": "2025-06-09T00:00:00Z",
+  "mentorshipTopic": "Backend using Nest.js",
+  "additionalNotes": "Need help understanding component architecture.",
+  "mentorId": "68128058e3792aaf5baada60",
+  
+}
+
+
+#Get request by ID
+GET http://localhost:8888/mentorship-requests/requestId
+Bearer Token
+
+
+#update request
+PATCH  http://localhost:8888/mentorship-requests/requestId
+Bearer Token
+{
+    "startDate": "2025-05-01T00:00:00.000Z",
+    "endDate": "2025-06-01T00:00:00.000Z",
+    "mentorshipTopic": "Frontend Development with React",
+    "additionalNotes": "Need help.",
+    "mentorId": "68128058e3792aaf5baada60"
+}
+
+#status update
+PATCH http://localhost:8888/mentorship-requests/status/change/requestId
+Bearer Token(mentor)
+{
+  "status": "accepted"
+}
+
+#delete request
+
+DELETE http://localhost:8888/mentorship-requests/requestId
+
+#Get All requests
+Bearer Token(mentee)
+
+GET http://localhost:8888/mentorship-requests
+
+#Get all mentees
+
+GET http://localhost:8888/mentees
+Bearer Token(of the mentor)
+
+#Get all mentors
+
+GET http://localhost:8888/mentors
+Bearer Token(of the mentee)
